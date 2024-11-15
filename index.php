@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Se l'utente è amministratore, può vedere tutte le immagini
+// If the user is an administrator, they can see all images
 $is_admin = ($_SESSION['role'] == 'admin');
 
 if ($is_admin) {
@@ -18,7 +18,7 @@ if ($is_admin) {
 $images = $stmt->fetchAll();
 ?>
 
-<h1>Catalogo Immagini</h1>
+<h1>Image Catalog</h1>
 
 <?php foreach ($images as $image): ?>
     <div>
@@ -26,7 +26,7 @@ $images = $stmt->fetchAll();
         <?php if ($is_admin): ?>
             <form method="post" action="inappropriate.php">
                 <input type="hidden" name="image_id" value="<?php echo $image['id']; ?>" />
-                <button type="submit">Segnala come Inappropriata</button>
+                <button type="submit">Report as Inappropriate</button>
             </form>
         <?php endif; ?>
     </div>
