@@ -1,8 +1,10 @@
 # Use the official PHP 7.3 image with Apache
 FROM php:7.3-apache
 
-# Define the env variable for the Apache listening port 8080
+# Define the env variable for the Apache listening port 8080 and app name as well as php env
 ENV myPORT=8080
+ENV APP_NAME "PHP Amarcord from Dockerfile"
+ENV PHP_ENV 'DFLT_DOCKERFILE'
 
 # Install the MySQL extension
 RUN docker-php-ext-install mysqli
