@@ -10,7 +10,10 @@ RUN docker-php-ext-install pdo pdo_mysql
 
 # Copy in custom code from the host machine.
 WORKDIR /var/www/html
-COPY . ./
+COPY ./ /var/www/html
+
+# to make uploads doable ?
+RUN chmod 777 /var/www/html/uploads/
 
 # Use the PORT environment variable in Apache configuration files.
 # https://cloud.google.com/run/docs/reference/container-contract#port
