@@ -1,26 +1,33 @@
-# Use the official PHP 7.3 image with Apache
-FROM php:7.3-apache
+# copied from https://www.cloudways.com/blog/docker-php-application/
 
-# Define the env variable for the Apache listening port 8080 and app name as well as php env
-ENV myPORT=8080
-ENV APP_NAME "PHP Amarcord from Dockerfile"
-ENV PHP_ENV 'DFLT_DOCKERFILE'
+FROM php:7.4-apache
 
 # Install the MySQL extension
 RUN docker-php-ext-install mysqli
 #        /usr/local/bin/docker-php-ext-install -j5 gd mbstring mysqli pdo pdo_mysql shmop
 RUN docker-php-ext-install -j5 mysqli pdo pdo_mysql
 
-# Copy in custom code from the host machine.
+# Create a directory for your application code
 WORKDIR /var/www/html
+
+# Copy the application code into the container
 COPY ./ /var/www/html
 
 # to make uploads doable ?
 RUN chmod 777 /var/www/html/uploads/
 
-# Use the PORT environment variable in Apache configuration files.
-# https://cloud.google.com/run/docs/reference/container-contract#port
-#RUN sed -i 's/80/${myPORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+# == riccardo note ==
+# 1. Cloud Run says: "We recommend that you listen on $PORT instead of this specific number."
+# But if I change 80 to 8080 Apache won't just pick it up from here, I need to specify in a non-standard apache config
+# =>  Too much hussle.
 
-# When in doubt, always expose to port 8080
-EXPOSE 8080
+# 2. TODO make uploads/ RW as per Gregorio instructions.
+
+# Expose port 80 for web traffic
+EXPOSE 80
+
+# added per Clod Run
+# https://stackoverflow.com/questions/59324794/google-cloud-run-port
+ENV PORT 80
+ENV APP_NAME "PHP Amarcord from Dockerfile"
+ENV PHP_ENV 'DFLT_DOCKERFILE'
