@@ -103,8 +103,8 @@ options:
   substitutionOption: ALLOW_LOOSE
   logging: CLOUD_LOGGING_ONLY
 substitutions:
-  _DEPLOY_REGION: europe-west8
-  _AR_HOSTNAME: europe-north1-b-docker.pkg.dev
+  _DEPLOY_REGION: europe-west2
+  _AR_HOSTNAME: europe-west2-docker.pkg.dev
   _PLATFORM: managed
   _SERVICE_NAME: php-amarcord
   _EXECUTION_ENVIRONMENT: 'rgc/cloudbuild'
