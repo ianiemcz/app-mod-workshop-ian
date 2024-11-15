@@ -24,7 +24,7 @@ RUN chmod 777 /var/www/html/uploads/
 # 2. TODO make uploads/ RW as per Gregorio instructions.
 
 # Expose port 80 for web traffic
-EXPOSE 8080
+EXPOSE 80
 
 # added per Clod Run
 # https://stackoverflow.com/questions/59324794/google-cloud-run-port
