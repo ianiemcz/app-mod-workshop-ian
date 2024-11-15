@@ -4,9 +4,10 @@ FROM php:7.3-apache
 # Define the env variable for the Apache listening port 8080
 ENV myPORT=8080
 
-# Configure PHP for Cloud Run.
-# Precompile PHP code with opcache.
-RUN docker-php-ext-install pdo pdo_mysql
+# Install the MySQL extension
+RUN docker-php-ext-install mysqli
+#        /usr/local/bin/docker-php-ext-install -j5 gd mbstring mysqli pdo pdo_mysql shmop
+RUN docker-php-ext-install -j5 mysqli pdo pdo_mysql
 
 # Copy in custom code from the host machine.
 WORKDIR /var/www/html
